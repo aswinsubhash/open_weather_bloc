@@ -1,10 +1,30 @@
 part of 'theme_bloc.dart';
 
-sealed class ThemeState extends Equatable {
-  const ThemeState();
-  
-  @override
-  List<Object> get props => [];
+enum AppTheme {
+  light,
+  dark,
 }
 
-final class ThemeInitial extends ThemeState {}
+class ThemeState extends Equatable {
+  final AppTheme appTheme;
+  const ThemeState({
+    this.appTheme = AppTheme.light,
+  });
+
+  factory ThemeState.initial() {
+    return const ThemeState();
+  }
+  @override
+  List<Object> get props => [appTheme];
+
+  @override
+  String toString() => 'ThemeState(appTheme: $appTheme)';
+
+  ThemeState copyWith({
+    AppTheme? appTheme,
+  }) {
+    return ThemeState(
+      appTheme: appTheme ?? this.appTheme,
+    );
+  }
+}
